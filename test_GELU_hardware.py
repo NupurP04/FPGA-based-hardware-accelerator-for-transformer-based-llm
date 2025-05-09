@@ -26,7 +26,7 @@ for i in range(num_runs):
     gelu(input_matrix, output_matrix)  # Apply GELU element-wise
     end_time = time.time()
     hardware_times.append(end_time - start_time)
-    print(f"Run {i+1}: {hardware_times[-1]:.6f} seconds")
+
 
 avg_hardware_time = sum(hardware_times) / num_runs
 avg_hardware_time_us = avg_hardware_time * 1_000_000
