@@ -4,7 +4,7 @@ import numpy as np
 import time
 
 # Load bitstream
-overlay = Overlay('Transformer.bit')
+overlay = Overlay('softmax.bit')
 
 # Initialize accelerator
 ini_Softmax()
@@ -26,7 +26,6 @@ for i in range(num_runs):
     softmax(input_matrix, output_matrix)  # Apply softmax row-wise
     end_time = time.time()
     hardware_times.append(end_time - start_time)
-    print(f"Run {i+1}: {hardware_times[-1]:.6f} seconds")
 
 avg_hardware_time = sum(hardware_times) / num_runs
 avg_hardware_time_us = avg_hardware_time * 1_000_000
