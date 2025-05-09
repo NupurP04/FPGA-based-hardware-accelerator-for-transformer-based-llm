@@ -4,7 +4,7 @@ import numpy as np
 import time
 
 # Load bitstream
-overlay = Overlay('LayerNorm.bit')
+overlay = Overlay('layerNorm.bit')
 
 # Initialize accelerator
 ini_LayerNorm()
