@@ -1,0 +1,32 @@
+from pynq import Overlay
+from LayerNorm import *  
+import numpy as np
+import time
+
+# Load bitstream
+overlay = Overlay('LayerNorm.bit')
+
+# Initialize accelerator
+ini_LayerNorm()
+
+# Create input and output matrices
+shape = (160, 160)  # 160x160 matrix
+input_matrix = vec_create(shape)  # Input: activations
+output_matrix = vec_create(shape)  # Output: normalized activations
+
+# Set input data
+input_data = np.random.randint(-128, 128, size=shape, dtype=np.int8)  # int8 input
+vec_setValue(input_matrix, input_data)
+
+# Measure timing over multiple runs
+num_runs = 10
+hardware_times = []
+for i in range(num_runs):
+    start_time = time.time()
+    layer_norm(input_matrix, output_matrix)  # Apply LayerNorm row-wise
+    end_time = time.time()
+    hardware_times.append(end_time - start_time)
+
+avg_hardware_time = sum(hardware_times) / num_runs
+avg_hardware_time_us = avg_hardware_time * 1_000_000
+print(f"\nLayerNorm computation time: {avg_hardware_time:.2f} usec")
