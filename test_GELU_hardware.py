@@ -4,7 +4,7 @@ import numpy as np
 import time
 
 # Load bitstream
-overlay = Overlay('GELU.bit')
+overlay = Overlay('Gelu.bit')
 
 # Initialize accelerator
 ini_GELU()
